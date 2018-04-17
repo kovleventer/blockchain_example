@@ -1,13 +1,24 @@
 #pragma once
 
 #include "wallet.h"
+#include "hashable.h"
 
 class Block : public Hashable {
 public:
-	Block();
-	bool valid(int difficulty);
+	Block(std::vector<Transaction*> transactions, std::string prevHash, int difficulty, std::string timeStamp = Util::timeStamp());
+	bool valid() const;
+	std::string hash() const;
+	int getDifficulty() const;
+	std::string getTimeStamp() const;
+	std::string getPreviousHash() const;
+	
+	void mine();
+	void setDifficulty(int newDifficulty);
+	~Block();
 private:
-	bool sealed;
+	std::string timeStamp;
+	std::string previousHash;
 	int nonce;
-	std::vector<Transaction> transactions;
+	int difficulty;
+	std::vector<Transaction*> transactions;
 };

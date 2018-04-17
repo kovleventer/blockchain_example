@@ -1,17 +1,19 @@
 #pragma once
 
+#include <vector>
+
 #include "block.h"
 #include "transaction.h"
 
 class Blockchain {
 public:
 	Blockchain();
-	//Blockchain(const Blockchain& b);
-	//Blockchain& operator=(const Blockchain& b);
-	
-	void addTransaction(Transaction t);
-	
-	bool validate();
+	void addTransaction(Transaction* t);
+	bool valid();
+	double getMiningReward();
+	void mine();
+	~Blockchain();
 private:
-	std::vector<Block> blocks;
+	std::vector<Block*> blocks;
+	std::vector<Transaction*> pendingTransactions;
 };
