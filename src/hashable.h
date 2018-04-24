@@ -6,5 +6,5 @@
 
 class Hashable {
 public:
-	virtual std::string hash() = 0;
+	virtual std::string hash() const = 0;
 };

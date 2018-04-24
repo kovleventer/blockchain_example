@@ -1,6 +1,6 @@
 #include "transaction.h"
 
-Transaction(std::string sender, std::string target, double amount, std::string timeStamp)
+Transaction::Transaction(std::string sender, std::string target, double amount, std::string timeStamp)
 	: sender(sender), target(target), amount(amount), timeStamp(timeStamp) {
 	if (amount < 0) {
 		throw std::runtime_error("Transaction amount can not be negative");
@@ -21,6 +21,13 @@ double Transaction::getAmount() const {
 
 std::string Transaction::getTimeStamp() const {
 	return timeStamp;
+}
+
+void Transaction::printTransaction(std::ostream& os) const {
+	os << "\t" << "Transaction: " << hash() << std::endl;
+	os << "\t\t" << "Sender: " << sender << std::endl;
+	os << "\t\t" << "Target: " << target << std::endl;
+	os << "\t\t" << "Amount: " << amount << std::endl;
 }
 	
 std::string Transaction::hash() const {

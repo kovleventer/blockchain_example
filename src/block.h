@@ -1,6 +1,10 @@
 #pragma once
 
-#include "wallet.h"
+#include <vector>
+#include <string>
+#include <iostream>
+
+#include "transaction.h"
 #include "hashable.h"
 
 class Block : public Hashable {
@@ -11,6 +15,7 @@ public:
 	int getDifficulty() const;
 	std::string getTimeStamp() const;
 	std::string getPreviousHash() const;
+	void printBlock(std::ostream& os) const;
 	
 	void mine();
 	void setDifficulty(int newDifficulty);

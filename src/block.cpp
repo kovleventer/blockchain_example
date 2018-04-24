@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block(std::vector<Transaction*> transactions, std::string prevHash, int difficulty, std::string timeStamp)
+Block::Block(std::vector<Transaction*> transactions, std::string prevHash, int difficulty, std::string timeStamp)
 	: nonce(0), transactions(transactions), previousHash(prevHash), difficulty(difficulty), timeStamp(timeStamp) {}
 
 bool Block::valid() const {
@@ -32,11 +32,20 @@ std::string Block::getTimeStamp() const {
 }
 
 std::string Block::getPreviousHash() const {
-	return prevHash;
+	return previousHash;
 }
 
 int Block::getDifficulty() const {
 	return difficulty;
+}
+
+void Block::printBlock(std::ostream& os) const {
+	os << "Block hash: " << hash() << std::endl;
+	os << "\t" << "Timestamp: " << timeStamp << std::endl;
+	os << "\t" << "Previous Hash: " << previousHash << std::endl;
+	for (size_t i = 0; i < transactions.size(); i++) {
+		transactions[i]->printTransaction(os);
+	}
 }
 
 void Block::mine() {

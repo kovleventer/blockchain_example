@@ -3,9 +3,9 @@
 #include <string>
 #include <stdexcept>
 #include <sstream>
+#include <iostream>
 
-#include "wallet.h"
-#include "util.h"
+#include "util.hpp"
 #include "hashable.h"
 
 class Transaction : public Hashable {
@@ -15,6 +15,7 @@ public:
 	std::string getTargetKey() const;
 	double getAmount() const;
 	std::string getTimeStamp() const;
+	void printTransaction(std::ostream& os) const;
 	
 	std::string hash() const;
 private:
