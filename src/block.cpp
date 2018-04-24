@@ -1,7 +1,7 @@
 #include "block.h"
 
 Block::Block(std::vector<Transaction*> transactions, std::string prevHash, int difficulty, std::string timeStamp)
-	: nonce(0), transactions(transactions), previousHash(prevHash), difficulty(difficulty), timeStamp(timeStamp) {}
+	: transactions(transactions), previousHash(prevHash), difficulty(difficulty), timeStamp(timeStamp), nonce(0) {}
 
 bool Block::valid() const {
 	std::string h = hash();

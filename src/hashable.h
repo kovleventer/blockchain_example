@@ -7,4 +7,5 @@
 class Hashable {
 public:
 	virtual std::string hash() const = 0;
+	virtual ~Hashable() {}
 };

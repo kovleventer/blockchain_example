@@ -21,9 +21,9 @@ public:
 	void setDifficulty(int newDifficulty);
 	~Block();
 private:
-	std::string timeStamp;
-	std::string previousHash;
-	int nonce;
-	int difficulty;
 	std::vector<Transaction*> transactions;
+	std::string previousHash;
+	int difficulty;
+	std::string timeStamp;
+	int nonce;
 };
