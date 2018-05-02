@@ -5,6 +5,7 @@ namespace Util {
 std::string timeStamp() {
 	time_t currentTime = time(0);
 	tm timeStruct;
+	//Thread safety magic
 	#if (defined(WIN32)  || defined(_WIN32) ||defined (__WIN32__))
 		localtime_s(&timeStruct, &currentTime);
 	#else

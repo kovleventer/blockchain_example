@@ -8,6 +8,10 @@
 #include "transaction.h"
 #include "util.hpp"
 
+/**
+ * @class Blockchain
+ * 
+ */
 class Blockchain {
 public:
 	Blockchain();

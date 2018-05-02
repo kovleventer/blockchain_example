@@ -1,6 +1,6 @@
 #include "blockchain.h"
 
-Blockchain::Blockchain() : difficulty(3) {
+Blockchain::Blockchain() : difficulty(5) {
 	blocks.push_back(new Block(std::vector<Transaction*>(), "", difficulty));
 }
 
