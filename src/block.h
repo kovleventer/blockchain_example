@@ -63,6 +63,13 @@ public:
 	 */
 	void printBlock(std::ostream& os) const;
 	
+	/**
+	 * Sums all received and sent money within this current block
+	 * @param publicKey The public key of the wallet
+	 * @return The sum of received money minus the sum of sent money
+	 */
+	double getProfitOfWallet(std::string publicKey) const;
+	
 	
 	/**
 	 * Mines a block
@@ -81,7 +88,9 @@ public:
 	 * Destructor for Block
 	 */
 	~Block();
+#ifndef HACKER
 private:
+#endif
 	std::vector<Transaction*> transactions;
 	std::string previousHash;
 	int difficulty;

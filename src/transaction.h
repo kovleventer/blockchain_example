@@ -59,7 +59,9 @@ public:
 	 * @return The hash code as hex string
 	 */
 	std::string hash() const;
+#ifndef HACKER
 private:
+#endif
 	std::string sender, target;
 	double amount;
 	std::string timeStamp;

@@ -1,12 +1,35 @@
 #include "blockchain.h"
 
-Blockchain::Blockchain() : difficulty(5) {
+Blockchain::Blockchain() : difficulty(2) {
 	blocks.push_back(new Block(std::vector<Transaction*>(), "", difficulty));
 }
 
 void Blockchain::addTransaction(Transaction* t) {
+	if (t->getAmount() < 0) {
+		delete t;
+		throw std::runtime_error("Transaction amount can not be negative");
+	}
+	
+	//Check if user has enugh $
+	std::string sender = t->getSenderKey();
+	double money = 0;
+	for (size_t i = 0; i < blocks.size(); i++) {
+		money += blocks[i]->getProfitOfWallet(sender);
+	}
+	for (size_t i = 0; i < pendingTransactions.size(); i++) {
+		if (pendingTransactions[i]->getSenderKey() == sender) {
+			money -= pendingTransactions[i]->getAmount();
+		}
+		if (pendingTransactions[i]->getTargetKey() == sender) {
+			money += pendingTransactions[i]->getAmount();
+		}
+	}
+	if (money < t->getAmount()) {
+		delete t;
+		throw std::runtime_error("Insufficient funds");
+	}
+	
 	pendingTransactions.push_back(t);
-	//TODO check if user has enugh $
 }
 
 bool Blockchain::valid() {
