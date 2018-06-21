@@ -21,7 +21,7 @@ std::string Block::hash() const {
 	ss << timeStamp;
 	ss << difficulty;
 	for (size_t i = 0; i < transactions.size(); i++) {
-		ss << transactions[i];
+		ss << transactions[i]->hash();
 	}
 	picosha2::hash256_hex_string(ss.str(), hashString);
 	return hashString;
@@ -46,6 +46,19 @@ void Block::printBlock(std::ostream& os) const {
 	for (size_t i = 0; i < transactions.size(); i++) {
 		transactions[i]->printTransaction(os);
 	}
+}
+
+double Block::getProfitOfWallet(std::string publicKey) const {
+	double profit = 0;
+	for (size_t i = 0; i < transactions.size(); i++) {
+		if (transactions[i]->getSenderKey() == publicKey) {
+			profit -= transactions[i]->getAmount();
+		}
+		if (transactions[i]->getTargetKey() == publicKey) {
+			profit += transactions[i]->getAmount();
+		}
+	}
+	return profit;
 }
 
 void Block::mine() {

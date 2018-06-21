@@ -2,9 +2,6 @@
 
 Transaction::Transaction(std::string sender, std::string target, double amount, std::string timeStamp)
 	: sender(sender), target(target), amount(amount), timeStamp(timeStamp) {
-	if (amount < 0) {
-		throw std::runtime_error("Transaction amount can not be negative");
-	}
 }
 
 std::string Transaction::getSenderKey() const {
